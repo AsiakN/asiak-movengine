@@ -1,0 +1,5 @@
+
+from recommend_page import show_recommendation_page, Show_most_watched_movies
+
+show_recommendation_page()
+Show_most_watched_movies()
