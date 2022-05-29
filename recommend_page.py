@@ -50,10 +50,10 @@ def show_recommendation_page():
                 recommend_frame.append({'Title':movies.iloc[idx]['title'].values[0],'Genre':movies.iloc[idx]['genres'].values[0]})
             df = pd.DataFrame(recommend_frame,index=range(1,n_movies_to_recommend+1))
             st.dataframe(df)
-            st.markdown('#')
+            st.balloons()
         else:
-            st.write('No  movies found. Please Check for another movie')
-            st.markdown('#')
+            st.warning('No  movies found. Please Check for another movie')
+            
 
 def Show_most_watched_movies():
     st.markdown('##')
