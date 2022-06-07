@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import os
 from sklearn.neighbors import NearestNeighbors
-from pages.explore_page import final_dataset,csr_data,num_user_voted
+from explore_page import final_dataset,csr_data,num_user_voted
 
 main_directory = os.getcwd()
 target_directory = "ml-latest-small"
