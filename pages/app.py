@@ -5,6 +5,13 @@ import numpy as np
 import os
 from sklearn.neighbors import NearestNeighbors
 from pages.explore import final_dataset,csr_data,num_user_voted
+from PIL import Image
+
+spiderman = Image.open('amazing_spiderman.jpg')
+iron_man = Image.open('iron_man.jpg')
+titanic = Image.open('titanic.jpg')
+memento = Image.open('memento.jpg')
+
 
 main_directory = os.getcwd()
 target_directory = "ml-latest-small"
@@ -33,6 +40,20 @@ def show_recommendation_page():
     n_movies_to_recommend = st.slider('Number of Movies to recommend', 0,10,5)
     movies['title1'] = movies['title'].str.lower()
     movie_list = movies[movies['title1'].str.contains(movie_name)]
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.image(spiderman, caption='Amazing Spiderman', width=150, use_column_width=3, clamp=False)
+
+    with col2:
+        st.image(iron_man, caption='Iron Man', width=150, use_column_width=2, clamp=False)
+
+    with col3:
+        st.image(titanic, caption='Titanic', width=150, use_column_width=3, clamp=False)
+    
+    with col4:
+        st.image(memento, caption='Memento', width=150, use_column_width=4, clamp=False)
+    
+    
     ok = st.button("Get Recommendations 🐱‍💻")
     if ok:
 
