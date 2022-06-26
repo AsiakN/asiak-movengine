@@ -7,10 +7,10 @@ from sklearn.neighbors import NearestNeighbors
 from pages.explore import final_dataset,csr_data,num_user_voted
 from PIL import Image
 
-spiderman = Image.open('amazing_spiderman.jpg')
-iron_man = Image.open('iron_man.jpg')
-titanic = Image.open('titanic.jpg')
-memento = Image.open('memento.jpg')
+spiderman = Image.open('img/amazing_spiderman.jpg')
+iron_man = Image.open('img/iron_man.jpg')
+titanic = Image.open('img/titanic.jpg')
+memento = Image.open('img/memento.jpg')
 
 
 main_directory = os.getcwd()
