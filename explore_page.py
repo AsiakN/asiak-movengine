@@ -1,23 +1,51 @@
-import pandas as pd
-import numpy as np
-import os
-from scipy.sparse import csr_matrix
+import streamlit as st
+from streamlit_tags import st_tags, st_tags_sidebar
 
-main_directory = os.getcwd()
-target_directory = "ml-latest-small"
-work_directory = os.path.join(main_directory, target_directory)
+st.write("# Code for streamlit tags")
 
-movies = pd.read_csv(os.path.join(work_directory, "movies.csv"))
-ratings = pd.read_csv(os.path.join(work_directory,'ratings.csv'))
+st.code(body='''keywords = st_tags(
+    label='# Enter Keywords:',
+    text='Press enter to add more',
+    value=['Zero', 'One', 'Two'],
+    suggestions=['five', 'six', 'seven', 'eight', 'nine', 'three', 'eleven', 'ten', 'four'],
+    maxtags = 4,
+    key='1')''',
+        language="python")
 
-final_dataset = ratings.pivot(index='movieId', columns='userId', values='rating')
-final_dataset.fillna(0, inplace=True)
+maxtags = st.slider('Number of tags allowed?', 1, 10, 3, key='jfnkerrnfvikwqejn')
 
-num_user_voted = ratings.groupby('movieId')['rating'].agg('count')  #votes for each movie
-num_movies_voted = ratings.groupby('userId')['rating'].agg('count') #votes by each user
+keywords = st_tags(
+    label='# Enter Keywords:',
+    text='Press enter to add more',
+    value=['Zero', 'One', 'Two'],
+    suggestions=['five', 'six', 'seven', 'eight', 'nine', 'three', 'eleven', 'ten', 'four'],
+    maxtags=maxtags,
+    key="aljnf")
 
-final_dataset = final_dataset.loc[num_user_voted[num_user_voted > 10].index, :]
-final_dataset  = final_dataset.loc[:, num_movies_voted[num_movies_voted>50].index]
-csr_data = csr_matrix(final_dataset.values)
-final_dataset.reset_index(inplace=True)
+st.write("### Results:")
+st.write(type(keywords))
 
+st.sidebar.write("# Code for streamlit tags sidebar")
+
+st.sidebar.code(body='''keyword = st_tags_sidebar(
+label='# Enter Keywords:',
+text='Press enter to add more',
+value=['Zero', 'One', 'Two'],
+suggestions=['five', 'six', 'seven', 
+'eight', 'nine', 'three', 
+'eleven', 'ten', 'four'],
+maxtags = 4)''',
+                language="python")
+
+maxtags_sidebar = st.sidebar.slider('Number of tags allowed?', 1, 10, 3, key='ehikwegrjifbwreuk')
+
+
+keyword = st_tags_sidebar(label='# Enter Keywords:',
+                          text='Press enter to add more',
+                          value=['Zero', 'One', 'Two'],
+                          suggestions=['five', 'six', 'seven', 'eight', 'nine', 'three', 'eleven', 'ten', 'four'],
+                          maxtags=maxtags_sidebar,
+                          key="afrfae")
+
+st.sidebar.write("### Results:")
+st.sidebar.write((keyword))

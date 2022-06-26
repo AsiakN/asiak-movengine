@@ -22,6 +22,13 @@ final_dataset  = final_dataset.loc[:, num_movies_voted[num_movies_voted>50].inde
 csr_data = csr_matrix(final_dataset.values)
 final_dataset.reset_index(inplace=True)
 
+movie_dataset = movies.pivot(index='movieId', columns='genres', values='title')
+genres =  movies.groupby('genres')['title'].agg('count') #votes for each movie
+movie_dataset = movie_dataset.loc[num_user_voted[num_user_voted>10].index, :]
+movie_dataset = movie_dataset.loc[:, genres[genres>100].index]
+movie_dataset = movie_dataset.fillna(0)
+
+
 
 def Show_most_watched_movies():
     st.markdown('##')
@@ -36,4 +43,14 @@ def Show_most_watched_movies():
         df_most_watched = pd.DataFrame(most_watched,index=range(1,n_most_watched_movies+1))
         st.dataframe(df_most_watched)  
 
-Show_most_watched_movies()     
+def list_movies(column_name):
+    try:
+        if column_name in movie_dataset.columns:
+            movie_list = movie_dataset.loc[movie_dataset[column_name] != 0]
+            print(movie_list[column_name])
+    except ValueError:
+        
+        print('Genre not found')
+
+Show_most_watched_movies() 
+list_movies()    
