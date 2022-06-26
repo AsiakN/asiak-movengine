@@ -4,10 +4,10 @@ from streamlit_tags import st_tags, st_tags_sidebar
 st.write("# Code for streamlit tags")
 
 st.code(body='''keywords = st_tags(
-    label='# Enter Keywords:',
+    label='# Genres:',
     text='Press enter to add more',
     value=['Zero', 'One', 'Two'],
-    suggestions=['five', 'six', 'seven', 'eight', 'nine', 'three', 'eleven', 'ten', 'four'],
+    suggestions=['comedy', 'comedy|Drama', 'seven', 'eight', 'nine', 'three', 'eleven', 'ten', 'four'],
     maxtags = 4,
     key='1')''',
         language="python")
@@ -26,6 +26,12 @@ st.write("### Results:")
 st.write(type(keywords))
 
 st.sidebar.write("# Code for streamlit tags sidebar")
+
+options = st.multiselect(
+     'What are your favorite colors',
+     ['Green', 'Yellow', 'Red', 'Blue'],
+     )
+st.write('You selected:', options)
 
 st.sidebar.code(body='''keyword = st_tags_sidebar(
 label='# Enter Keywords:',

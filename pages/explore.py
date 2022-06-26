@@ -30,6 +30,7 @@ movie_dataset = movie_dataset.fillna(0)
 
 
 
+
 def Show_most_watched_movies():
     st.markdown('##')
     with st.expander('Curious about the most watched movies?', expanded=False):
@@ -43,14 +44,25 @@ def Show_most_watched_movies():
         df_most_watched = pd.DataFrame(most_watched,index=range(1,n_most_watched_movies+1))
         st.dataframe(df_most_watched)  
 
-def list_movies(column_name):
-    try:
-        if column_name in movie_dataset.columns:
-            movie_list = movie_dataset.loc[movie_dataset[column_name] != 0]
-            print(movie_list[column_name])
-    except ValueError:
-        
-        print('Genre not found')
+def list_movies():
+    with st.expander('Curious about the most popular genres?', expanded=False):
+        option = st.selectbox(
+     'Choose genre',
+     ('Comedy', 'Comedy|Crime', 'Comedy|Drama', 'Comedy|Drama|Romance', 'Comedy|Romance', 'Comedy|Romance',
+      'Crime|Drama|Thriller','Documentary',  'Drama','Drama|Romance', 'Drama|Thriller''Drama|War','Horror',
+      'Horror|Thriller')
+      )
+        try:
+            if option in movie_dataset.columns:
+                movie_list = movie_dataset.loc[movie_dataset[option] != 0]
+                st.write(movie_list[option])
+        except ValueError:
+            print('Genre not found')
+
+    
 
 Show_most_watched_movies() 
 list_movies()    
+
+
+#t.write('You selected:', options)
