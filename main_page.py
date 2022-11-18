@@ -20,9 +20,11 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Hello",
+        page_title="Movie Recommender streamlit app",
         page_icon="👋",
     )
+
+    st.header("Movie recommender system built using Content-based filtering based off the KNN algorithm")
 
     st.write("# Welcome to the Asiak Movie Engine! 👋")
 
@@ -36,7 +38,7 @@ def run():
         **👈 Select a page from the sidebar** to get some recommendations or 
         learn more about the data
         ### Want the source code?
-        - Check out my github [Awontiirim](https://github.com/Awontiirim/asiak-movengine)
+        - Check out my github [AsiakN](https://github.com/AsiakN/asiak-movengine)
         - Send me a DM on [Twiter](https://twitter.com/NathanielAsiak)
         - Let's Connect on [Linkedin](https://www.linkedin.com/in/nathanielasiak/)
         - Check out streamlit to learn more about deploying machine learning applications
