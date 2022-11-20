@@ -32,14 +32,6 @@ knn = data['model']
 
 def show_recommendation_page():
     st.title('The Asiak Movie Engine')
-
-    st.write('### Looking for movie suggestions 🤔?')
-
-    movie = st.text_input('Enter the last movie you loved') 
-    movie_name = movie.lower()
-    n_movies_to_recommend = st.slider('Number of Movies to recommend', 0,10,5)
-    movies['title1'] = movies['title'].str.lower()
-    movie_list = movies[movies['title1'].str.contains(movie_name)]
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.image(spiderman, caption='Amazing Spiderman', width=150, use_column_width=3, clamp=False)
@@ -52,6 +44,16 @@ def show_recommendation_page():
     
     with col4:
         st.image(memento, caption='Memento', width=150, use_column_width=4, clamp=False)
+    
+    
+    st.write('### Looking for movie suggestions 🤔?')
+
+    movie = st.text_input('Enter the last movie you loved') 
+    movie_name = movie.lower()
+    n_movies_to_recommend = st.slider('Number of Movies to recommend', 0,10,5)
+    movies['title1'] = movies['title'].str.lower()
+    movie_list = movies[movies['title1'].str.contains(movie_name)]
+   
     
     
     ok = st.button("Get Recommendations 🐱‍💻")
@@ -68,7 +70,7 @@ def show_recommendation_page():
             for val in rec_movie_indices:
                 movie_idx = final_dataset.iloc[val[0]]['movieId']
                 idx = movies[movies['movieId']== movie_idx].index
-                recommend_frame.append({'Title':movies.iloc[idx]['title'].values[0],'Genre':movies.iloc[idx]['genres'].values[0]})
+                recommend_frame.append({'Title':movies.iloc[idx]['title'].values[0],'Genre':movies.iloc[idx]['genres'].values[0], 'Movie Emojis': 'Emo🚗'})
             df = pd.DataFrame(recommend_frame,index=range(1,n_movies_to_recommend+1))
             st.dataframe(df)
             st.balloons()
