@@ -6,6 +6,7 @@ import os
 from sklearn.neighbors import NearestNeighbors
 from pages.explore import final_dataset,csr_data,num_user_voted
 from PIL import Image
+from movie_emoji import create_emoji
 
 spiderman = Image.open('img/amazing_spiderman.jpg')
 iron_man = Image.open('img/iron_man.jpg')
@@ -70,7 +71,7 @@ def show_recommendation_page():
             for val in rec_movie_indices:
                 movie_idx = final_dataset.iloc[val[0]]['movieId']
                 idx = movies[movies['movieId']== movie_idx].index
-                recommend_frame.append({'Title':movies.iloc[idx]['title'].values[0],'Genre':movies.iloc[idx]['genres'].values[0], 'Movie Emojis': 'Emo🚗'})
+                recommend_frame.append({'Title':movies.iloc[idx]['title'].values[0],'Genre':movies.iloc[idx]['genres'].values[0], 'Movie Emojis': create_emoji(movie_name)})
             df = pd.DataFrame(recommend_frame,index=range(1,n_movies_to_recommend+1))
             st.dataframe(df)
             st.balloons()
