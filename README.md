@@ -4,7 +4,7 @@
 ## 🧐 About <a name = "about"></a>
 
 This repo contains the source code for the movie recommender system deployed on streamlit
-- Try out a demo here: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](]https://awontiirim-asiak-movengine-main-page-3quiks.streamlitapp.com/)
+- Try out a demo here: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]](https://asiak-moviengine.streamlit.app/)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
