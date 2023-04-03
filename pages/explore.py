@@ -53,7 +53,6 @@ md_baby = Image.open('img/drama/Md_baby.jpg')
 gatsby = Image.open('img/drama/the_gatsby.jpg')
 pursuit = Image.open('img/drama/the_pursuit.jpg')
 
-
 def Show_most_watched_movies():
     st.markdown('##')
     with st.expander('Curious about the most watched movies?', expanded=False):

@@ -1,25 +1,45 @@
 import os
 import openai
 from dotenv import load_dotenv
-import requests
+import logging
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_base = os.getenv("OPENAI_BASE_URL")
 
 # models = openai.Model.list()
 
 api_key = openai.api_key
-api_url = openai.api_base
 
-def create_emoji(prompt: str):
-    header = {'Authorization' :f'Bearer {api_key}'}
-    payload = {'model': 'text-davinci-002', 'prompt': prompt, "max_tokens": 6, "temperature": 0.9}
-    response = requests.post(url=api_url, headers=header, data=payload)
-    if response.status_code == 200: 
-        return response
-    return f"Something went wrong😶"
+def create_emoji(movie_name: str):
+    # print(api_key)
+    # header = {'Authorization' :f'Bearer {api_key}'}
+    # print(api_url)
+    # payload = {'model': 'text-davinci-002', 'prompt': prompt, "max_tokens": 6, "temperature": 0.9}
+    try:
+        response = openai.Completion.create(
+        model="text-davinci-002",
+        prompt= f'Remove the dates in the bracket in the movie title and convert the movie title to an emoji. \n\n{movie_name}',
+        max_tokens=7,
+        temperature=0.9
+    )
+        return response.choices[0].text
+    except openai.error.APIError as e:
+        print('failed to connect to api')
+        logging.error(e._message)
+    except openai.error.APIConnectionError as e:
+        #Handle connection error here
+        print(f"Failed to connect to OpenAI API: {e}")
+        pass
+    except openai.error.RateLimitError as e:
+        #Handle rate limit error (we recommend using exponential backoff)
+        print(f"OpenAI API request exceeded rate limit: {e}")
+        pass
+    except openai.error.InvalidRequestError as e:
+        #Handle invalid requests 
+        print(f"OpenAI API invalid request: {e._message}")
+        pass
 
     
 
-res = create_emoji("Iron man")
+# res = create_emoji("Iron Man 2 (2010)")
+# print(res)

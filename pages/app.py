@@ -21,7 +21,7 @@ work_directory = os.path.join(main_directory, target_directory)
 movies = pd.read_csv(os.path.join(work_directory, "movies.csv"))
 ratings = pd.read_csv(os.path.join(work_directory,'ratings.csv'))
 
-@st.cache
+@st.cache_data
 def load_model():
     with open('saved_steps.pkl', 'rb') as file:
         data = pickle.load(file)
